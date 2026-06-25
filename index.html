@@ -1,223 +1,925 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fast Lad Academy — Where Drivers Become Scholars of Speed</title>
-    <meta name="description" content="Motorsport telemetry analytics for drivers who want to get faster. Something new is coming.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        :root {
-            --limestone: #e8e0d4;
-            --hearthstone: #ddd5c6;
-            --granite: #d0c8b8;
-            --mortar: #c8baa4;
-            --iron: #2a2420;
-            --oak: #6a5a45;
-            --gold: #96700e;
-            --gold-bright: #c8952e;
-            --seal: #8b1a1a;
-            --muted: #8a7a65;
-            --radius: 6px;
-        }
+  <title>Fast Lad Academy — Come Home Faster</title>
+  <meta name="description" content="A coaching community for drivers serious about getting faster. Learn the craft, submit your sessions, and get an annotated walkthrough from credentialed instructors within 48 hours. Come home faster.">
+  <meta name="theme-color" content="#0E0E10">
+  <link rel="canonical" href="https://fastladacad.com/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: var(--limestone);
-            color: var(--iron);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+  <!-- Open Graph / social sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fast Lad Academy">
+  <meta property="og:title" content="Fast Lad Academy — Come Home Faster">
+  <meta property="og:description" content="Learn the craft, submit your sessions, and get coached by credentialed drivers within 48 hours. The first 500 members lock in 25% off — for life.">
+  <meta property="og:url" content="https://fastladacad.com/">
+  <!-- TODO: add a 1200x630 PNG at /og-image.png and uncomment:
+  <meta property="og:image" content="https://fastladacad.com/og-image.png"> -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fast Lad Academy — Come Home Faster">
+  <meta name="twitter:description" content="Learn the craft, submit your sessions, and get coached by credentialed drivers within 48 hours.">
 
-        .container {
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 0 24px;
-            width: 100%;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-        .crown-border {
-            height: 4px;
-            background: linear-gradient(90deg, var(--seal), var(--gold-bright), var(--seal));
-            flex-shrink: 0;
-        }
+  <style>
+    /* ──────────────────────────────────────────────────────────────
+       Fast Lad Academy — public landing page.
+       Brand: dual-palette. Castle Hall = structure (crests, tiers, belonging).
+       The Workshop/Paddock = surface (dark, golden work-light, orange action).
+         Paddock Gold   #C9A227  — brand / marketing / achievement
+         Workshop Orange #FF6B00 — actions / CTAs
+         Wax-seal crimson #8B1A1A — urgency / scarcity (the Founding 500)
+       Voice: "come home faster."
+       No build step, no framework — vanilla HTML/CSS/JS so GitHub Pages can't break.
+       ────────────────────────────────────────────────────────────── */
 
-        .great-hall {
-            padding: 96px 0 72px;
-            text-align: center;
-            background: linear-gradient(180deg, var(--granite) 0%, var(--limestone) 100%);
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .great-hall h1 {
-            font-family: 'Crimson Pro', Georgia, serif;
-            font-size: clamp(2.4rem, 6vw, 3.4rem);
-            font-weight: 700;
-            color: var(--iron);
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-        }
+    :root {
+      --bg: #0E0E10;
+      --panel: #17171B;
+      --panel-2: #1F1F25;
+      --line: rgba(201, 162, 39, 0.16);
+      --line-soft: rgba(255, 255, 255, 0.07);
 
-        .great-hall h1 .gold {
-            color: var(--gold);
-        }
+      --gold: #C9A227;
+      --gold-lt: #E6C75A;
+      --orange: #FF6B00;
+      --orange-lt: #FF8A33;
+      --wax: #8B1A1A;
+      --wax-lt: #C0392B;
+      --crimson-lt: #EF7A6E;   /* lightened crimson — clears AA for small text on dark */
+      --green: #3A6A3A;
 
-        .gold-divider {
-            width: 40%;
-            max-width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(150, 112, 14, 0.5), transparent);
-            margin: 20px auto;
-        }
+      --ink: #FAFAF8;          /* headings */
+      --text: #D8D5CE;         /* body */
+      --muted: #A7A29A;        /* secondary */
+      --faint: #908B82;        /* tertiary — AA on panels */
 
-        .great-hall .motto {
-            font-family: 'Crimson Pro', Georgia, serif;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
-            color: var(--oak);
-            font-style: italic;
-        }
+      --radius: 14px;
+      --radius-sm: 10px;
+      --maxw: 1120px;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
 
-        .great-hall .description {
-            font-size: 1rem;
-            color: var(--oak);
-            max-width: 480px;
-            margin: 20px auto 0;
-            line-height: 1.7;
-        }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
 
-        .tapestry {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(200, 149, 46, 0.25), rgba(139, 26, 26, 0.25), rgba(200, 149, 46, 0.25), transparent);
-        }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
 
-        .status {
-            padding: 72px 0;
-            text-align: center;
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    /* Paddock atmosphere: golden work-light glow + faint film grain. */
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
+      background:
+        radial-gradient(60rem 40rem at 50% -10%, rgba(201, 162, 39, 0.10), transparent 70%),
+        radial-gradient(44rem 32rem at 90% 108%, rgba(255, 107, 0, 0.06), transparent 70%);
+    }
+    body::after {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
 
-        .scroll-card {
-            background: var(--hearthstone);
-            border: 1px solid var(--mortar);
-            border-radius: var(--radius);
-            padding: 48px 32px;
-            max-width: 480px;
-            margin: 0 auto;
-            position: relative;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; max-width: 100%; }
+    ul { list-style: none; }
 
-        .scroll-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--seal), var(--gold-bright), var(--seal));
-            border-radius: var(--radius) var(--radius) 0 0;
-        }
+    /* ── Layout ── */
+    .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    section { position: relative; }
+    .eyebrow {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold);
+    }
+    h1, h2, h3 { font-family: 'Cinzel', Georgia, 'Times New Roman', serif; color: var(--ink); line-height: 1.12; }
 
-        .scroll-card h2 {
-            font-family: 'Crimson Pro', Georgia, serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--iron);
-            margin-bottom: 12px;
-        }
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute; left: 12px; top: -100px; z-index: 200;
+      background: var(--gold); color: #1a1407; padding: 10px 16px; border-radius: 8px;
+      font-weight: 700; transition: top 0.2s var(--ease);
+    }
+    .skip-link:focus { top: 12px; }
 
-        .scroll-card p {
-            font-size: 0.95rem;
-            color: var(--oak);
-            line-height: 1.7;
-            margin-bottom: 8px;
-        }
+    /* ── Top crown bar ── */
+    .crown { height: 3px; background: linear-gradient(90deg, var(--wax), var(--gold), var(--orange), var(--gold), var(--wax)); }
 
-        .scroll-card p:last-child {
-            margin-bottom: 0;
-        }
+    /* ── Header / nav ── */
+    header.site {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(14, 14, 16, 0.82);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 14px 0; }
+    .brand { display: flex; align-items: center; gap: 11px; }
+    .brand .logo { width: 36px; height: 36px; flex-shrink: 0; }
+    .brand .name {
+      font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.05rem;
+      letter-spacing: 0.04em; color: var(--ink); white-space: nowrap;
+    }
+    .brand .name .gold { color: var(--gold); }
+    .nav-links { display: none; margin-left: auto; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 0.92rem; color: var(--muted); font-weight: 500;
+      transition: color 0.2s var(--ease); padding: 6px 0;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }
+    .nav-cta { margin-left: auto; flex-shrink: 0; }
+    .nav-links + .nav-cta { margin-left: 8px; }
+    .nav-cta .cta-short { display: inline; }
+    .nav-cta .cta-full { display: none; }
+    @media (min-width: 420px) { .nav-cta .cta-short { display: none; } .nav-cta .cta-full { display: inline; } }
 
-        .scroll-card .note {
-            font-size: 0.85rem;
-            color: var(--muted);
-            font-style: italic;
-            margin-top: 20px;
-            margin-bottom: 0;
-        }
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.98rem;
+      padding: 13px 22px; border-radius: 11px; border: 1.5px solid transparent;
+      cursor: pointer; transition: transform 0.18s var(--ease), box-shadow 0.18s var(--ease), background 0.18s var(--ease), border-color 0.18s var(--ease);
+      min-height: 48px; text-align: center; line-height: 1.2;
+    }
+    .btn-primary {
+      background: var(--orange); color: #1A0E03;
+      box-shadow: 0 10px 28px -12px rgba(255, 107, 0, 0.7);
+    }
+    .btn-primary:hover, .btn-primary:focus-visible {
+      background: var(--orange-lt); transform: translateY(-2px);
+      box-shadow: 0 16px 34px -12px rgba(255, 107, 0, 0.75);
+    }
+    .btn-gold {
+      background: transparent; color: var(--gold-lt); border-color: rgba(201, 162, 39, 0.5);
+    }
+    .btn-gold:hover, .btn-gold:focus-visible {
+      background: rgba(201, 162, 39, 0.1); border-color: var(--gold); transform: translateY(-2px);
+    }
+    .btn-ghost { background: transparent; color: var(--text); border-color: var(--line-soft); }
+    .btn-ghost:hover, .btn-ghost:focus-visible { border-color: rgba(255,255,255,0.25); color: var(--ink); }
+    .btn-sm { padding: 11px 16px; font-size: 0.9rem; min-height: 44px; }
+    .btn-block { width: 100%; }
 
-        footer {
-            margin-top: auto;
-            padding: 36px 0;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
+    /* ── Pills / badges ── */
+    .pills { display: flex; flex-wrap: wrap; gap: 9px; justify-content: center; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+      padding: 6px 13px; border-radius: 999px;
+      border: 1px solid var(--line); background: rgba(255,255,255,0.02); color: var(--text);
+    }
+    .pill .dot { width: 7px; height: 7px; border-radius: 50%; }
+    .pill .dot.gold { background: var(--gold); }
+    .pill .dot.orange { background: var(--orange); }
+    .pill .dot.wax { background: var(--wax-lt); animation: pulse 2.4s var(--ease) infinite; }
 
-        .bottom-border {
-            height: 4px;
-            background: linear-gradient(90deg, var(--seal), var(--gold-bright), var(--seal));
-            flex-shrink: 0;
-        }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
 
-        @media (max-width: 720px) {
-            .great-hall {
-                padding: 72px 0 56px;
-            }
+    /* ── Hero ── */
+    .hero { padding: 72px 0 64px; text-align: center; }
+    .hero .crest-ring {
+      width: 92px; height: 92px; margin: 0 auto 26px;
+      display: grid; place-items: center; border-radius: 50%;
+      border: 1px solid rgba(201, 162, 39, 0.3);
+      background: radial-gradient(circle at 50% 35%, rgba(201,162,39,0.12), transparent 70%);
+      box-shadow: 0 0 40px -10px rgba(201, 162, 39, 0.4);
+    }
+    .hero .crest-ring .logo { width: 56px; height: 56px; }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6.5vw, 4.2rem); font-weight: 700;
+      letter-spacing: 0.01em; margin: 22px auto 0; max-width: 16ch;
+    }
+    .hero h1 .accent { display: block; color: var(--gold); }
+    .hero .lede {
+      font-size: clamp(1.05rem, 2.4vw, 1.28rem); color: var(--text);
+      max-width: 40ch; margin: 22px auto 0;
+    }
+    .hero .frame {
+      font-size: 1rem; color: var(--muted); max-width: 46ch; margin: 16px auto 0;
+    }
+    .hero .frame b { color: var(--gold-lt); font-weight: 600; }
+    .hero .cta-row { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+    .hero .ticker {
+      margin-top: 26px; font-size: 0.85rem; color: var(--faint); letter-spacing: 0.02em;
+    }
+    .hero .ticker strong { color: var(--gold); font-weight: 600; }
 
-            .status {
-                padding: 48px 0;
-            }
+    /* ── Mission band ── */
+    .mission { padding: 30px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: rgba(255,255,255,0.012); }
+    .mission p {
+      font-family: 'Cinzel', serif; text-align: center; font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+      color: var(--ink); line-height: 1.4; max-width: 28ch; margin: 0 auto; font-weight: 500;
+    }
+    .mission p span { color: var(--gold); }
 
-            .scroll-card {
-                padding: 32px 20px;
-            }
-        }
-    </style>
+    /* ── Section headers ── */
+    .sec-head { max-width: 56ch; margin: 0 auto 44px; text-align: center; }
+    .sec-head h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; margin: 10px 0 0; }
+    .sec-head p { color: var(--muted); margin-top: 14px; font-size: 1.05rem; }
+
+    .section-pad { padding: 76px 0; }
+
+    /* ── How it works ── */
+    .steps { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    .step {
+      background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius);
+      padding: 28px 26px; transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .step:hover { border-color: rgba(201, 162, 39, 0.4); transform: translateY(-3px); }
+    .step .num-row { display: flex; align-items: center; gap: 14px; }
+    .step .num {
+      font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--gold);
+      font-variant-numeric: tabular-nums; line-height: 1;
+    }
+    .step .rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(201,162,39,0.45), transparent); }
+    .step h3 { font-size: 1.22rem; font-weight: 600; margin-top: 18px; color: var(--ink); }
+    .step p { color: var(--muted); margin-top: 9px; font-size: 0.98rem; }
+    .step p .hi { color: var(--orange-lt); font-weight: 600; }
+    .mid-cta { text-align: center; margin-top: 40px; }
+
+    /* ── Tiers ── */
+    .founding-callout {
+      display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; justify-content: space-between;
+      background: linear-gradient(120deg, rgba(139, 26, 26, 0.18), rgba(31, 31, 37, 0.6));
+      border: 1px solid rgba(192, 57, 43, 0.4); border-radius: var(--radius);
+      padding: 22px 26px; margin-bottom: 36px;
+    }
+    .founding-callout .fc-text { min-width: 0; flex: 1 1 320px; }
+    .founding-callout .fc-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.74rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--crimson-lt);
+    }
+    .founding-callout h3 { font-size: 1.3rem; margin-top: 6px; color: var(--ink); }
+    .founding-callout h3 span { color: var(--gold); }
+    .founding-callout p { font-size: 0.92rem; color: var(--muted); margin-top: 4px; }
+    .fc-meter { flex: 1 1 260px; min-width: 0; }
+    .fc-bar { height: 12px; border-radius: 999px; background: rgba(255,255,255,0.07); overflow: hidden; border: 1px solid var(--line-soft); }
+    .fc-bar > span { display: block; height: 100%; width: 4%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--gold), var(--orange)); transition: width 1s var(--ease); }
+    .fc-meter .fc-label { display: flex; justify-content: space-between; margin-top: 9px; font-size: 0.82rem; color: var(--muted); }
+    .fc-meter .fc-label strong { color: var(--gold-lt); font-weight: 700; }
+
+    .tiers { display: grid; gap: 20px; grid-template-columns: 1fr; align-items: start; }
+    .tier {
+      position: relative; background: var(--panel); border: 1px solid var(--line-soft);
+      border-radius: var(--radius); padding: 30px 26px; display: flex; flex-direction: column;
+      transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    .tier:hover { transform: translateY(-3px); }
+    .tier.featured {
+      border-color: rgba(201, 162, 39, 0.55);
+      box-shadow: 0 14px 40px -22px rgba(201, 162, 39, 0.55);
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    }
+    .tier .ribbon {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--gold); color: #1a1407; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; white-space: nowrap;
+    }
+    .tier .t-name { font-family: 'Cinzel', serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); }
+    .tier .t-price { margin-top: 14px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .tier .t-price .std {
+      color: var(--faint); text-decoration: line-through; text-decoration-color: rgba(192,57,43,0.7);
+      font-size: 1.05rem; font-weight: 500;
+    }
+    .tier .t-price .now { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; color: var(--ink); }
+    .tier .t-price .per { color: var(--muted); font-size: 0.92rem; }
+    .tier .t-founding {
+      margin-top: 6px; font-size: 0.8rem; font-weight: 600; color: var(--gold);
+      letter-spacing: 0.02em;
+    }
+    .tier ul { margin: 22px 0 26px; display: grid; gap: 11px; }
+    .tier li { display: flex; gap: 11px; align-items: flex-start; font-size: 0.95rem; color: var(--text); }
+    .tier li svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; color: var(--gold); }
+    .tier li .em { color: var(--ink); font-weight: 600; }
+    .tier .btn { margin-top: auto; }
+    .tiers-note { text-align: center; color: var(--faint); font-size: 0.86rem; margin-top: 26px; max-width: 60ch; margin-left: auto; margin-right: auto; }
+
+    /* ── Credibility strip ── */
+    .cred {
+      position: relative; overflow: hidden;
+      background: linear-gradient(130deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--line); border-radius: var(--radius);
+      padding: 44px 32px;
+    }
+    .cred::before {
+      content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background: radial-gradient(36rem 22rem at 12% 120%, rgba(201,162,39,0.1), transparent 70%);
+    }
+    .cred > * { position: relative; z-index: 1; }
+    .cred-grid { display: grid; gap: 34px; grid-template-columns: 1fr; align-items: center; }
+    .cred h2 { font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 700; margin-top: 10px; max-width: 18ch; }
+    .cred .cred-lede { color: var(--muted); margin-top: 16px; max-width: 52ch; }
+    .crests { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+    .crest {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 0.82rem; font-weight: 600;
+      padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--text);
+      background: rgba(255,255,255,0.02);
+    }
+    .crest svg { width: 15px; height: 15px; color: var(--gold); }
+    .marques { margin-top: 22px; font-size: 0.9rem; color: var(--muted); }
+    .marques b { color: var(--text); font-weight: 600; }
+    .cred-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 14px; }
+    .cred-stat {
+      background: rgba(255,255,255,0.025); border: 1px solid var(--line-soft);
+      border-radius: var(--radius-sm); padding: 18px 14px; text-align: center;
+    }
+    .cred-stat .v { font-family: 'Cinzel', serif; font-size: 1.7rem; font-weight: 700; color: var(--gold); line-height: 1; }
+    .cred-stat .k { font-size: 0.76rem; color: var(--muted); margin-top: 8px; line-height: 1.35; overflow-wrap: break-word; }
+
+    /* ── FAQ ── */
+    .faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+    details.faq {
+      background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
+      overflow: hidden; transition: border-color 0.2s var(--ease);
+    }
+    details.faq[open] { border-color: rgba(201, 162, 39, 0.35); }
+    details.faq summary {
+      list-style: none; cursor: pointer; padding: 20px 22px; display: flex; align-items: center;
+      justify-content: space-between; gap: 16px; font-weight: 600; color: var(--ink); font-size: 1.04rem;
+    }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary .chev {
+      flex-shrink: 0; width: 20px; height: 20px; color: var(--gold);
+      transition: transform 0.25s var(--ease);
+    }
+    details.faq[open] summary .chev { transform: rotate(180deg); }
+    details.faq .ans { padding: 0 22px 22px; color: var(--muted); font-size: 0.98rem; }
+    details.faq .ans p + p { margin-top: 10px; }
+
+    /* ── Waitlist CTA ── */
+    .waitlist {
+      text-align: center;
+      background:
+        radial-gradient(40rem 24rem at 50% 0%, rgba(255,107,0,0.1), transparent 70%),
+        linear-gradient(180deg, var(--panel-2), var(--panel));
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 56px 28px;
+    }
+    .waitlist h2 { font-size: clamp(1.9rem, 4.4vw, 2.8rem); font-weight: 700; max-width: 18ch; margin: 12px auto 0; }
+    .waitlist h2 span { color: var(--gold); }
+    .waitlist .sub { color: var(--text); max-width: 48ch; margin: 18px auto 0; font-size: 1.05rem; }
+    .wl-form {
+      display: flex; gap: 12px; max-width: 480px; margin: 32px auto 0; flex-wrap: wrap; justify-content: center;
+    }
+    .wl-form .field { flex: 1 1 240px; min-width: 0; text-align: left; }
+    .wl-form label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 7px; letter-spacing: 0.04em; }
+    .wl-form input[type="email"] {
+      width: 100%; padding: 13px 16px; border-radius: 11px; min-height: 48px;
+      background: rgba(0,0,0,0.35); border: 1.5px solid var(--line-soft); color: var(--ink);
+      font-size: 1rem; font-family: inherit; transition: border-color 0.2s var(--ease);
+    }
+    .wl-form input[type="email"]::placeholder { color: var(--faint); }
+    .wl-form input[type="email"]:focus { outline: none; border-color: var(--gold); }
+    .wl-form .submit-wrap { display: flex; align-items: flex-end; }
+    .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+    #wl-status { margin: 18px auto 0; min-height: 1.4em; font-size: 0.95rem; max-width: 44ch; }
+    #wl-status.ok { color: var(--gold-lt); }
+    #wl-status.err { color: var(--crimson-lt); }
+    .wl-fine { margin-top: 16px; font-size: 0.82rem; color: var(--faint); }
+    .wl-fine a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+    .wl-fine a:hover { color: var(--gold-lt); }
+
+    /* ── Footer ── */
+    footer.site { border-top: 1px solid var(--line); padding: 48px 0 40px; text-align: center; margin-top: 80px; }
+    footer .logo { width: 30px; height: 30px; margin: 0 auto 14px; opacity: 0.9; }
+    footer .f-name { font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 0.05em; color: var(--text); }
+    footer .f-name span { color: var(--gold); }
+    footer .f-tag { color: var(--faint); font-size: 0.85rem; margin-top: 8px; max-width: 44ch; margin-left: auto; margin-right: auto; }
+    footer .f-links { margin-top: 18px; display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; }
+    footer .f-links a { font-size: 0.85rem; color: var(--muted); transition: color 0.2s var(--ease); }
+    footer .f-links a:hover, footer .f-links a:focus-visible { color: var(--gold-lt); }
+    footer .copy { margin-top: 22px; font-size: 0.78rem; color: var(--faint); }
+
+    /* ── Focus visibility ── */
+    a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+      outline: 2px solid var(--gold-lt); outline-offset: 3px; border-radius: 6px;
+    }
+
+    /* ── Reveal on scroll ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media (min-width: 680px) {
+      .steps { grid-template-columns: repeat(3, 1fr); }
+      .wl-form { flex-wrap: nowrap; }
+    }
+    @media (min-width: 860px) {
+      .nav-links { display: flex; }
+      .nav-cta { margin-left: 8px; }
+      .tiers { grid-template-columns: repeat(3, 1fr); }
+      .cred-grid { grid-template-columns: 1.4fr 1fr; }
+      .hero { padding: 96px 0 80px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="crown" aria-hidden="true"></div>
 
-    <div class="crown-border"></div>
+  <!-- ───────────────────────── HEADER ───────────────────────── -->
+  <header class="site">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Fast Lad Academy home">
+        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+          <path d="M8 18a8 8 0 0 1 16 0v3H8z" fill="#F5F5F5"/>
+          <rect x="9" y="14" width="14" height="4" rx="2" fill="#1A1A1E"/>
+          <path d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke="#FF6B00" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="name">FAST LAD <span class="gold">ACADEMY</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#how">How it works</a>
+        <a href="#membership">Membership</a>
+        <a href="#instructors">Instructors</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-primary btn-sm nav-cta" href="#join"><span class="cta-full">Join the Founding 500</span><span class="cta-short">Join the 500</span></a>
+    </div>
+  </header>
 
-    <section class="great-hall">
-        <div class="container">
-            <h1>Fast Lad <span class="gold">Academy</span></h1>
-            <div class="gold-divider"></div>
-            <p class="motto">Where drivers become scholars of speed</p>
-            <p class="description">Motorsport telemetry analytics for drivers who want to get faster. Built by drivers, for drivers.</p>
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- ───────────────────────── HERO ───────────────────────── -->
+    <section class="hero">
+      <div class="wrap">
+        <div class="crest-ring" aria-hidden="true">
+          <svg class="logo" viewBox="0 0 32 32">
+            <path d="M8 18a8 8 0 0 1 16 0v3H8z" fill="#F5F5F5"/>
+            <rect x="9" y="14" width="14" height="4" rx="2" fill="#1A1A1E"/>
+            <path d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke="#FF6B00" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
         </div>
+
+        <div class="pills">
+          <span class="pill"><span class="dot gold" aria-hidden="true"></span>Community-first</span>
+          <span class="pill"><span class="dot orange" aria-hidden="true"></span>48-hour coaching loop</span>
+          <span class="pill"><span class="dot wax" aria-hidden="true"></span>Founding 500 open</span>
+        </div>
+
+        <h1>Don't just buy more track time.<span class="accent">Come home faster.</span></h1>
+
+        <p class="lede">
+          A coaching community for drivers serious about getting faster — without needing a fortune
+          or an inside connection to break in.
+        </p>
+        <p class="frame">
+          One track weekend costs $500 and you come home with memories.
+          <b>One month of membership costs less — and you come home faster.</b>
+        </p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#join">Join the Founding 500</a>
+          <a class="btn btn-gold" href="#how">See how it works</a>
+        </div>
+
+        <p class="ticker">
+          <strong>500</strong> lifetime founding memberships · <strong>25% off, forever</strong> · once they're claimed, the rate is gone.
+        </p>
+      </div>
     </section>
 
-    <div class="tapestry"></div>
+    <!-- ───────────────────────── MISSION BAND ───────────────────────── -->
+    <section class="mission" aria-label="Our mission">
+      <div class="wrap">
+        <p>The grassroots scene is disappearing.<br><span>We're building the one that should exist.</span></p>
+      </div>
+    </section>
 
-    <section class="status">
-        <div class="container">
-            <div class="scroll-card">
-                <h2>Under Construction</h2>
-                <p>We're rethinking a few things behind the scenes. The academy will return with something worth the wait.</p>
-                <p class="note">If you need to reach us, find us at the track.</p>
+    <!-- ───────────────────────── HOW IT WORKS ───────────────────────── -->
+    <section class="section-pad" id="how">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">The loop</span>
+          <h2>How it works</h2>
+          <p>Three steps from your last lap to your next one — every session reviewed by a real racer.</p>
+        </div>
+
+        <div class="steps">
+          <article class="step reveal">
+            <div class="num-row"><span class="num">1</span><span class="rule" aria-hidden="true"></span></div>
+            <h3>Learn the craft</h3>
+            <p>Work the full Foundation Course — the racing line, vision, threshold braking, reading your
+              own data — built and taught by drivers who've competed at a national level. Finish it, earn your certificate.</p>
+          </article>
+
+          <article class="step reveal">
+            <div class="num-row"><span class="num">2</span><span class="rule" aria-hidden="true"></span></div>
+            <h3>Submit your session</h3>
+            <p>Upload your in-car video from your last track day or sim run. Add a data export from any
+              logger if you've got one — it makes the review sharper, but it's optional.</p>
+          </article>
+
+          <article class="step reveal">
+            <div class="num-row"><span class="num">3</span><span class="rule" aria-hidden="true"></span></div>
+            <h3>Come home faster</h3>
+            <p>A credentialed instructor sends back an annotated, corner-by-corner walkthrough — showing
+              you exactly where the time is — <span class="hi">within 48 hours.</span></p>
+          </article>
+        </div>
+
+        <div class="mid-cta reveal">
+          <a class="btn btn-primary" href="#join">Start your first review — join the Founding 500</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── MEMBERSHIP / TIERS ───────────────────────── -->
+    <section class="section-pad" id="membership">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Membership</span>
+          <h2>Pick your grid slot</h2>
+          <p>Monthly membership, not per-event. Get everyone in the paddock — never gatekeep on money.</p>
+        </div>
+
+        <!-- Founding 500 scarcity callout -->
+        <div class="founding-callout reveal">
+          <div class="fc-text">
+            <span class="fc-tag"><span class="dot wax" style="width:8px;height:8px;border-radius:50%;background:var(--wax-lt);display:inline-block" aria-hidden="true"></span>The Founding 500</span>
+            <h3>First 500 members lock in <span>25% off — for life.</span></h3>
+            <p>Only 500 will ever exist. The discount is permanent; the window closes when they're gone.</p>
+          </div>
+          <div class="fc-meter">
+            <div class="fc-bar"><span id="fc-fill"></span></div>
+            <div class="fc-label">
+              <span id="fc-claimed">Founding spots — now open</span>
+              <span id="fc-remaining-wrap"><strong id="fc-remaining">500</strong> of 500 left</span>
             </div>
+          </div>
         </div>
+
+        <div class="tiers">
+          <!-- Paddock -->
+          <div class="tier reveal">
+            <div class="t-name">Paddock</div>
+            <div class="t-price">
+              <span class="std"><span class="visually-hidden">Standard price </span>$25</span>
+              <span class="now">$18.75</span>
+              <span class="per">/ mo</span>
+            </div>
+            <div class="t-founding">Founding rate · 25% off for life</div>
+            <ul>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Full <span class="em">paddock community</span> — debriefs, garage talk, the room</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The complete <span class="em">Foundation Course</span> — certificate &amp; badge on completion</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>The recorded <span class="em">Pit Wall</span> session library</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>À-la-carte session reviews at your tier rate</span></li>
+            </ul>
+            <a class="btn btn-gold btn-block" href="#join">Start in the Paddock</a>
+          </div>
+
+          <!-- Hot Lap (featured) -->
+          <div class="tier featured reveal">
+            <span class="ribbon">Most popular</span>
+            <div class="t-name">Hot Lap</div>
+            <div class="t-price">
+              <span class="std"><span class="visually-hidden">Standard price </span>$50</span>
+              <span class="now">$37.50</span>
+              <span class="per">/ mo</span>
+            </div>
+            <div class="t-founding">Founding rate · 25% off for life</div>
+            <ul>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="em">Everything in Paddock</span></span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="em">1 coaching session review</span> every month</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="em">Live Pit Wall</span> access + Q&amp;A</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>À-la-carte reviews at your <span class="em">Hot Lap</span> discount</span></li>
+            </ul>
+            <a class="btn btn-primary btn-block" href="#join">Join at Hot Lap</a>
+          </div>
+
+          <!-- Grid -->
+          <div class="tier reveal">
+            <div class="t-name">Grid</div>
+            <div class="t-price">
+              <span class="std"><span class="visually-hidden">Standard price </span>$99</span>
+              <span class="now">$74.25</span>
+              <span class="per">/ mo</span>
+            </div>
+            <div class="t-founding">Founding rate · 25% off for life</div>
+            <ul>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="em">Everything in Hot Lap</span></span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="em">2 coaching session reviews</span> every month</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span><span class="em">Priority</span> review queue</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority live Q&amp;A</span></li>
+            </ul>
+            <a class="btn btn-gold btn-block" href="#join">Take the Grid</a>
+          </div>
+        </div>
+
+        <p class="tiers-note">
+          À-la-carte session reviews are available at every tier, with your tier's discount applied.
+          Standard prices shown struck through; the founding rate is locked for life for the first 500 members. Cancel anytime.
+        </p>
+      </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Fast Lad Academy LLC</p>
+    <!-- ───────────────────────── INSTRUCTOR CREDIBILITY ───────────────────────── -->
+    <section class="section-pad" id="instructors">
+      <div class="wrap">
+        <div class="cred reveal">
+          <div class="cred-grid">
+            <div>
+              <span class="eyebrow">The founding cohort</span>
+              <h2>Former competitors. National &amp; regional champions.</h2>
+              <p class="cred-lede">
+                The drivers reviewing your laps aren't strangers reading a manual — they're club-level
+                instructors and champions who used to beat us to the apex, coaching the platform you
+                actually drive. This is a hall you earn your way into, lap by lap.
+              </p>
+              <div class="crests">
+                <span class="crest"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>Founding instructors</span>
+                <span class="crest"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>National champions</span>
+                <span class="crest"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>Regional champions</span>
+                <span class="crest"><svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9 4.8 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>Credentialed coaches</span>
+              </div>
+              <p class="marques">
+                <b>Launch coverage:</b> Mustang · Civic · Camaro · Corvette · Miata · Porsche · S2000 — and growing.
+                Don't see your platform? Join anyway — it goes on the map and we recruit for it.
+              </p>
+            </div>
+
+            <div class="cred-stats" role="list" aria-label="What you get">
+              <div class="cred-stat" role="listitem"><div class="v">48h</div><div class="k">Review turnaround</div></div>
+              <div class="cred-stat" role="listitem"><div class="v">1:1</div><div class="k">Coaching on your car</div></div>
+              <div class="cred-stat" role="listitem"><div class="v">∞</div><div class="k">Your ghost to chase</div></div>
+            </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </section>
 
-    <div class="bottom-border"></div>
+    <!-- ───────────────────────── FAQ ───────────────────────── -->
+    <section class="section-pad" id="faq">
+      <div class="wrap">
+        <div class="sec-head reveal">
+          <span class="eyebrow">Paddock notes</span>
+          <h2>Frequently asked</h2>
+        </div>
 
+        <div class="faq-list">
+          <details class="faq reveal">
+            <summary>What is Fast Lad Academy?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>A coaching community for drivers serious about getting faster: a full curriculum,
+              video and data session reviews from credentialed instructors, live Pit Wall sessions, and a real
+              paddock community that doesn't pack up when the track day ends.</p></div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>How is this different from a weekend racing school?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans">
+              <p>A weekend is one shot, a long wait, and a big bill. We're ongoing: learn the craft, submit real
+                sessions from your own car, and get coached again and again.</p>
+              <p>We don't compete with track time — we make every lap you've already paid for worth more.</p>
+            </div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>I'm a beginner / I'm already quick — is this for me?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>Both. Beginners get a structured path from the ground up. Experienced drivers can submit
+              a session any time — you never have to sit through coursework you already know to get coached.</p></div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>What do I need to submit a session?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>In-car video from your last track day or sim run. A data/telemetry export from any logger
+              makes the review sharper, but it's optional — your video alone is plenty to get started.</p></div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>How fast do I get my review back?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>Within 48 hours — often before your next event, while the laps are still fresh.</p></div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>What's the Founding 500?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>The first 500 members lock in 25% off their tier — for life, as long as they stay subscribed.
+              Only 500 founding memberships will ever exist. After that, standard pricing applies.</p></div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>What cars do you coach?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>Launch coverage spans Mustang, Civic, Camaro, Corvette, Miata, Porsche, S2000 and more — with
+              instructors who've driven your exact platform to its limit. Don't see yours? Join anyway: your platform
+              goes on the coverage map, and that's how we recruit the next instructor.</p></div>
+          </details>
+
+          <details class="faq reveal">
+            <summary>Can I cancel anytime?
+              <svg class="chev" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <div class="ans"><p>Yes. It's a monthly membership, not a contract. The point is access, not lock-in.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────────────────── WAITLIST CTA ───────────────────────── -->
+    <section class="section-pad" id="join">
+      <div class="wrap">
+        <div class="waitlist reveal">
+          <span class="eyebrow">Claim your spot</span>
+          <h2>Join the <span>Founding 500</span></h2>
+          <p class="sub">500 lifetime founding memberships. 25% off, forever. Leave your email and we'll
+            reach out the moment your spot opens.</p>
+
+          <!--
+            Waitlist capture — Formspree stub.
+            SETUP: create a free form at https://formspree.io, then replace
+            REPLACE_WITH_FORM_ID below with your form id (e.g. action="https://formspree.io/f/xabcdefgh").
+            Until then, the JS falls back to a mailto: handoff so no signup is ever lost.
+          -->
+          <form class="wl-form" id="wl-form" action="https://formspree.io/f/REPLACE_WITH_FORM_ID" method="POST">
+            <div class="field">
+              <label for="wl-email">Email address</label>
+              <input id="wl-email" name="email" type="email" autocomplete="email" required
+                     placeholder="you@example.com" aria-describedby="wl-status">
+            </div>
+            <!-- honeypot: bots fill this; humans never see it -->
+            <div class="honeypot" aria-hidden="true">
+              <label for="wl-company">Company</label>
+              <input id="wl-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <input type="hidden" name="_subject" value="New Founding 500 waitlist signup">
+            <div class="submit-wrap">
+              <button class="btn btn-primary" type="submit">Claim my founding spot</button>
+            </div>
+          </form>
+
+          <p id="wl-status" role="status" aria-live="polite"></p>
+          <p class="wl-fine">
+            No spam — just the launch. Prefer email? Reach us at
+            <a href="mailto:hello@fastladacad.com?subject=Founding%20500%20waitlist">hello@fastladacad.com</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ───────────────────────── FOOTER ───────────────────────── -->
+  <footer class="site">
+    <div class="wrap">
+      <svg class="logo" viewBox="0 0 32 32" role="img" aria-label="Fast Lad Academy">
+        <path d="M8 18a8 8 0 0 1 16 0v3H8z" fill="#F5F5F5"/>
+        <rect x="9" y="14" width="14" height="4" rx="2" fill="#1A1A1E"/>
+        <path d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke="#FF6B00" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <p class="f-name">FAST LAD ACADEMY — <span>come home faster.</span></p>
+      <p class="f-tag">A community of credentialed drivers. Coaching, not lap times for their own sake.</p>
+      <nav class="f-links" aria-label="Footer">
+        <a href="#how">How it works</a>
+        <a href="#membership">Membership</a>
+        <a href="#instructors">Instructors</a>
+        <a href="#faq">FAQ</a>
+        <a href="#join">Join</a>
+      </nav>
+      <p class="copy">&copy; 2026 Fast Lad Academy LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* ── Founding 500 counter ──────────────────────────────────
+         Honest pre-launch default: all 500 open. As members join, set
+         FOUNDING_CLAIMED to the live count (0–500) and the bar/labels update.
+         (When the FLA web app exposes a count endpoint, fetch it here instead.) */
+      var FOUNDING_TOTAL = 500;
+      var FOUNDING_CLAIMED = 0; // TODO: update as founding members join
+
+      var claimed = Math.max(0, Math.min(FOUNDING_TOTAL, FOUNDING_CLAIMED));
+      var remaining = FOUNDING_TOTAL - claimed;
+      var fill = document.getElementById("fc-fill");
+      var remEl = document.getElementById("fc-remaining");
+      var remWrap = document.getElementById("fc-remaining-wrap");
+      var claimedEl = document.getElementById("fc-claimed");
+      var bar = fill ? fill.parentNode : null;
+
+      if (claimed === 0) {
+        // Launch state: lead with momentum, not an empty "0 of 500" meter.
+        if (bar) bar.style.display = "none";
+        if (remWrap) remWrap.style.display = "none";
+        if (claimedEl) claimedEl.textContent = "Now open — lock 25% off for life before all 500 are claimed.";
+      } else {
+        var pct = Math.max(4, Math.round((claimed / FOUNDING_TOTAL) * 100));
+        if (fill) requestAnimationFrame(function () { fill.style.width = pct + "%"; });
+        if (remEl) remEl.textContent = remaining;
+        if (claimedEl) claimedEl.textContent = claimed + " claimed so far";
+      }
+
+      /* ── Reveal-on-scroll ────────────────────────────────────── */
+      var reveals = document.querySelectorAll(".reveal");
+      if ("IntersectionObserver" in window && reveals.length) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+          });
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+        reveals.forEach(function (el) { io.observe(el); });
+      } else {
+        reveals.forEach(function (el) { el.classList.add("in"); });
+      }
+
+      /* ── Waitlist form: progressive enhancement ────────────────
+         If a real Formspree endpoint is configured, submit via fetch and
+         show inline status. Otherwise, hand off to email so nothing is lost. */
+      var form = document.getElementById("wl-form");
+      var status = document.getElementById("wl-status");
+      if (!form || !status) return;
+
+      var configured = form.action.indexOf("REPLACE_WITH_FORM_ID") === -1;
+
+      function setStatus(msg, kind) {
+        status.textContent = msg;
+        status.className = kind || "";
+      }
+
+      form.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        var emailInput = document.getElementById("wl-email");
+        var honeypot = document.getElementById("wl-company");
+        if (honeypot && honeypot.value) return; // bot
+        if (!emailInput || !emailInput.checkValidity()) {
+          setStatus("Please enter a valid email address.", "err");
+          if (emailInput) emailInput.focus();
+          return;
+        }
+        var email = emailInput.value.trim();
+
+        if (!configured) {
+          // Stub fallback — open a pre-filled email so the lead is never dropped.
+          setStatus("Opening your email app to finish — or write to hello@fastladacad.com.", "ok");
+          window.location.href =
+            "mailto:hello@fastladacad.com?subject=" + encodeURIComponent("Founding 500 waitlist") +
+            "&body=" + encodeURIComponent("I'd like to claim a Founding 500 spot. My email: " + email);
+          return;
+        }
+
+        var btn = form.querySelector("button[type=submit]");
+        if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+        setStatus("Saving your spot…", "");
+
+        fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        }).then(function (res) {
+          if (res.ok) {
+            form.reset();
+            setStatus("You're on the list. We'll be in touch the moment your founding spot opens. 🏁", "ok");
+          } else {
+            setStatus("Something went wrong — please email hello@fastladacad.com and we'll add you.", "err");
+          }
+        }).catch(function () {
+          setStatus("Network hiccup — please email hello@fastladacad.com and we'll add you.", "err");
+        }).finally(function () {
+          if (btn) { btn.disabled = false; btn.textContent = "Claim my founding spot"; }
+        });
+      });
+    })();
+  </script>
+
+  <!-- Organization schema for search engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Fast Lad Academy",
+    "url": "https://fastladacad.com/",
+    "slogan": "Come home faster.",
+    "description": "A coaching community for drivers serious about getting faster — curriculum, credentialed instructor session reviews within 48 hours, live sessions, and a real paddock community."
+  }
+  </script>
 </body>
 </html>
