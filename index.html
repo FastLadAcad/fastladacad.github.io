@@ -38,27 +38,141 @@
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* ──────────────────────────────────────────────────────────────
+       Theme tokens. :root is the WORKSHOP (default) theme; three
+       [data-theme] blocks override only the color tokens below.
+       All four palettes were WCAG-AA contrast-checked. Accent-tinted
+       decorations use color-mix(var(--accent)…) so they follow each
+       theme's accent (critical for the gold Paddock theme).
+       ────────────────────────────────────────────────────────────── */
     :root {
+      /* WORKSHOP — dark, theme-color #0B0B0D */
       --bg: #0B0B0D;
       --panel: #141417;
       --panel-2: #1B1B1F;
-      --line: rgba(255, 255, 255, 0.10);
-      --line-soft: rgba(255, 255, 255, 0.06);
-
-      --accent: #FF6B00;
-      --accent-lt: #FF8A33;
-      --accent-dim: rgba(255, 107, 0, 0.13);
-
       --ink: #F6F7F8;          /* headings */
       --text: #D4D6DA;         /* body */
       --muted: #9A9DA4;        /* secondary */
-      --faint: #767981;        /* tertiary — AA on panels */
+      --faint: #7E828A;        /* tertiary — AA on panels */
 
+      --accent: #FF6B00;
+      --accent-lt: #FF8A33;
+      --on-accent: #160A02;    /* text/ink that sits on an accent fill */
+      --accent-dim: color-mix(in srgb, var(--accent) 13%, transparent);
+
+      --line: rgba(255, 255, 255, 0.10);
+      --line-soft: rgba(255, 255, 255, 0.06);
+      --line-strong: rgba(255, 255, 255, 0.40);
+
+      --fill-subtle: rgba(255, 255, 255, 0.025);
+      --input-bg: rgba(0, 0, 0, 0.35);
+      --overlay-bg: rgba(11, 11, 13, 0.78);
+      --wash-1: rgba(255, 255, 255, 0.05);
+      --wash-2: color-mix(in srgb, var(--accent) 5%, transparent);
+
+      --logo-helmet: var(--ink);
+      --logo-visor: var(--bg);
+
+      /* structural — theme-independent */
       --radius: 14px;
       --radius-sm: 10px;
       --maxw: 1120px;
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
       --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* WORKSHOP — explicit selector (identical to :root default) */
+    [data-theme="workshop"] {
+      --bg: #0B0B0D;
+      --panel: #141417;
+      --panel-2: #1B1B1F;
+      --ink: #F6F7F8;
+      --text: #D4D6DA;
+      --muted: #9A9DA4;
+      --faint: #7E828A;
+      --accent: #FF6B00;
+      --accent-lt: #FF8A33;
+      --on-accent: #160A02;
+      --accent-dim: color-mix(in srgb, var(--accent) 13%, transparent);
+      --line: rgba(255, 255, 255, 0.10);
+      --line-soft: rgba(255, 255, 255, 0.06);
+      --line-strong: rgba(255, 255, 255, 0.40);
+      --fill-subtle: rgba(255, 255, 255, 0.025);
+      --input-bg: rgba(0, 0, 0, 0.35);
+      --overlay-bg: rgba(11, 11, 13, 0.78);
+      --wash-1: rgba(255, 255, 255, 0.05);
+      --wash-2: color-mix(in srgb, var(--accent) 5%, transparent);
+      --logo-helmet: var(--ink);
+      --logo-visor: var(--bg);
+    }
+
+    /* MIDNIGHT — dark, theme-color #12161D */
+    [data-theme="midnight"] {
+      --bg: #12161D;
+      --panel: #181D26;
+      --panel-2: #1F2530;
+      --ink: #F2F5FA;
+      --text: #D3DAE3;
+      --muted: #9AA4B2;
+      --faint: #7B8696;
+      --accent: #FF6B00;
+      --accent-lt: #FF8A33;
+      --on-accent: #16100A;
+      --line: rgba(255, 255, 255, 0.09);
+      --line-soft: rgba(255, 255, 255, 0.055);
+      --line-strong: rgba(255, 255, 255, 0.34);
+      --fill-subtle: rgba(255, 255, 255, 0.025);
+      --input-bg: rgba(0, 0, 0, 0.28);
+      --overlay-bg: rgba(18, 22, 29, 0.80);
+      --wash-1: rgba(255, 255, 255, 0.045);
+    }
+
+    /* DAYLIGHT — light, theme-color #FBFCFD.
+       Accent FILL stays bright #FF6B00 (buttons/ribbons) with dark
+       --on-accent; --accent-lt is the darker #C0510A used for accent
+       TEXT so it passes contrast on the light background. */
+    [data-theme="daylight"] {
+      --bg: #FBFCFD;
+      --panel: #F4F6F8;
+      --panel-2: #FFFFFF;
+      --ink: #0F1722;
+      --text: #1F2A37;
+      --muted: #4F5965;
+      --faint: #5D6671;
+      --accent: #FF6B00;
+      --accent-lt: #C0510A;
+      --on-accent: #1A1205;
+      --line: rgba(15, 23, 34, 0.12);
+      --line-soft: rgba(15, 23, 34, 0.07);
+      --line-strong: rgba(15, 23, 34, 0.24);
+      --fill-subtle: rgba(15, 23, 34, 0.03);
+      --input-bg: #FFFFFF;
+      --overlay-bg: rgba(251, 252, 253, 0.82);
+      --wash-1: rgba(15, 23, 34, 0.03);
+      --wash-2: color-mix(in srgb, var(--accent) 6%, transparent);
+    }
+
+    /* PADDOCK — warm dark + GOLD accent, theme-color #16120B.
+       --accent is gold here; every accent-tinted decoration uses
+       color-mix(var(--accent)…), so they follow the gold automatically. */
+    [data-theme="paddock"] {
+      --bg: #16120B;
+      --panel: #1F1A12;
+      --panel-2: #2A2317;
+      --ink: #F7F1E6;
+      --text: #E8DFCF;
+      --muted: #B5A88E;
+      --faint: #998C73;
+      --accent: #E0B25A;
+      --accent-lt: #F0C97A;
+      --on-accent: #2A1E0A;
+      --line: rgba(255, 245, 225, 0.10);
+      --line-soft: rgba(255, 245, 225, 0.06);
+      --line-strong: rgba(255, 245, 225, 0.34);
+      --fill-subtle: rgba(255, 245, 225, 0.03);
+      --input-bg: rgba(0, 0, 0, 0.30);
+      --overlay-bg: rgba(22, 18, 11, 0.80);
+      --wash-1: rgba(255, 245, 225, 0.045);
     }
 
     html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 80px; }
@@ -77,8 +191,8 @@
     body::before {
       content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none;
       background:
-        radial-gradient(58rem 40rem at 50% -12%, rgba(255, 255, 255, 0.05), transparent 70%),
-        radial-gradient(42rem 30rem at 88% 110%, rgba(255, 107, 0, 0.05), transparent 70%);
+        radial-gradient(58rem 40rem at 50% -12%, var(--wash-1), transparent 70%),
+        radial-gradient(42rem 30rem at 88% 110%, var(--wash-2), transparent 70%);
     }
 
     a { color: inherit; text-decoration: none; }
@@ -102,7 +216,7 @@
     /* ── Skip link ── */
     .skip-link {
       position: absolute; left: 12px; top: -100px; z-index: 200;
-      background: var(--accent); color: #160a02; padding: 10px 16px; border-radius: 8px;
+      background: var(--accent); color: var(--on-accent); padding: 10px 16px; border-radius: 8px;
       font-weight: 700; transition: top 0.2s var(--ease);
     }
     .skip-link:focus { top: 12px; }
@@ -110,13 +224,19 @@
     /* ── Header / nav ── */
     header.site {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(11, 11, 13, 0.78);
+      background: var(--overlay-bg);
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line-soft);
     }
     .nav { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding: 14px 0; }
     .brand { display: flex; align-items: center; gap: 11px; }
     .brand .logo { width: 34px; height: 34px; flex-shrink: 0; }
+
+    /* ── Logo (header + footer): themed via tokens so it stays legible
+       on light themes where a white helmet would otherwise vanish. ── */
+    .lg-helmet { fill: var(--logo-helmet); }
+    .lg-visor  { fill: var(--logo-visor); }
+    .lg-swoosh { stroke: var(--accent); }
     .brand .name {
       font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1.02rem;
       letter-spacing: 0.02em; color: var(--ink); white-space: nowrap;
@@ -128,7 +248,7 @@
     }
     .nav-links a:hover, .nav-links a:focus-visible { color: var(--ink); }
     .nav-cta { margin-left: auto; flex-shrink: 0; }
-    .nav-links + .nav-cta { margin-left: 8px; }
+    .theme-switcher + .nav-cta { margin-left: 8px; }
     .nav-cta .cta-short { display: inline; }
     .nav-cta .cta-full { display: none; }
     @media (min-width: 420px) { .nav-cta .cta-short { display: none; } .nav-cta .cta-full { display: inline; } }
@@ -142,17 +262,50 @@
       min-height: 48px; text-align: center; line-height: 1.2;
     }
     .btn-primary {
-      background: var(--accent); color: #160a02;
-      box-shadow: 0 10px 28px -14px rgba(255, 107, 0, 0.8);
+      background: var(--accent); color: var(--on-accent);
+      box-shadow: 0 10px 28px -14px color-mix(in srgb, var(--accent) 70%, transparent);
     }
     .btn-primary:hover, .btn-primary:focus-visible {
       background: var(--accent-lt); transform: translateY(-2px);
-      box-shadow: 0 16px 34px -14px rgba(255, 107, 0, 0.85);
+      box-shadow: 0 16px 34px -14px color-mix(in srgb, var(--accent) 70%, transparent);
     }
     .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
-    .btn-ghost:hover, .btn-ghost:focus-visible { border-color: rgba(255,255,255,0.4); transform: translateY(-2px); }
+    .btn-ghost:hover, .btn-ghost:focus-visible { border-color: var(--line-strong); transform: translateY(-2px); }
     .btn-sm { padding: 11px 16px; font-size: 0.9rem; min-height: 44px; }
     .btn-block { width: 100%; }
+
+    /* ── Theme switcher ── */
+    .theme-switcher { position: relative; display: inline-flex; margin-left: auto; flex-shrink: 0; }
+    .theme-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; padding: 0;
+      background: var(--panel); color: var(--muted);
+      border: 1px solid var(--line); border-radius: 10px; cursor: pointer;
+      transition: color 0.2s var(--ease), border-color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+    .theme-btn:hover, .theme-btn:focus-visible { color: var(--ink); border-color: var(--line-strong); }
+    .theme-btn svg { width: 19px; height: 19px; }
+    .theme-menu {
+      position: absolute; top: calc(100% + 10px); right: 0; z-index: 120;
+      min-width: 234px; padding: 7px; display: grid; gap: 2px;
+      background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius-sm);
+      box-shadow: 0 20px 44px -22px rgba(0, 0, 0, 0.7);
+    }
+    .theme-menu[hidden] { display: none; }
+    .theme-opt {
+      display: flex; align-items: center; gap: 11px; width: 100%;
+      padding: 9px 11px; border: 0; border-radius: 8px; background: transparent;
+      color: var(--text); cursor: pointer; text-align: left; font-family: inherit; font-size: 0.92rem;
+      transition: background 0.15s var(--ease), color 0.15s var(--ease);
+    }
+    .theme-opt:hover, .theme-opt:focus-visible { background: var(--fill-subtle); color: var(--ink); }
+    .theme-opt .sw { width: 15px; height: 15px; border-radius: 50%; flex-shrink: 0; border: 1px solid var(--line-strong); }
+    .theme-opt .txt { flex: 1; min-width: 0; display: flex; flex-direction: column; line-height: 1.25; }
+    .theme-opt .lbl { font-weight: 600; }
+    .theme-opt .blurb { font-size: 0.74rem; color: var(--muted); }
+    .theme-opt .tick { width: 16px; height: 16px; flex-shrink: 0; color: var(--accent); opacity: 0; }
+    .theme-opt[aria-checked="true"] .lbl { color: var(--ink); }
+    .theme-opt[aria-checked="true"] .tick { opacity: 1; }
 
     /* ── Hero ── */
     .hero { padding: 64px 0 64px; }
@@ -173,7 +326,7 @@
     .loop-tag span {
       font-family: var(--mono); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.02em;
       color: var(--ink); padding: 7px 13px; border: 1px solid var(--line); border-radius: 8px;
-      background: rgba(255,255,255,0.02);
+      background: var(--fill-subtle);
     }
     .hero .cta-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
     .hero .proof {
@@ -196,24 +349,24 @@
     .rc-chip {
       position: absolute; top: 10px; left: 10px;
       font-family: var(--mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em;
-      color: var(--ink); background: rgba(11,11,13,0.72); border: 1px solid var(--line);
+      color: var(--ink); background: var(--overlay-bg); border: 1px solid var(--line);
       padding: 4px 9px; border-radius: 6px; backdrop-filter: blur(4px);
     }
     .rc-telemetry { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-    .rc-metric { background: rgba(255,255,255,0.02); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 11px 13px; }
+    .rc-metric { background: var(--fill-subtle); border: 1px solid var(--line-soft); border-radius: var(--radius-sm); padding: 11px 13px; }
     .rc-metric .k { font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.08em; color: var(--faint); text-transform: uppercase; }
     .rc-metric .spark { margin-top: 7px; }
     .rc-note {
       display: flex; align-items: center; gap: 10px; margin-top: 12px;
       padding: 11px 13px; border-radius: var(--radius-sm);
-      background: var(--accent-dim); border: 1px solid rgba(255,107,0,0.28);
+      background: var(--accent-dim); border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
     }
     .rc-note .av { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
     .rc-note p { font-size: 0.86rem; color: var(--text); line-height: 1.4; }
     .rc-note b { color: var(--ink); font-weight: 600; }
 
     /* ── Mission band ── */
-    .mission { padding: 30px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: rgba(255,255,255,0.012); }
+    .mission { padding: 30px 0; border-top: 1px solid var(--line-soft); border-bottom: 1px solid var(--line-soft); background: var(--fill-subtle); }
     .mission p {
       font-family: 'Archivo', sans-serif; text-align: center; font-size: clamp(1.1rem, 2.6vw, 1.55rem);
       color: var(--ink); line-height: 1.32; max-width: 30ch; margin: 0 auto; font-weight: 700; letter-spacing: -0.01em;
@@ -232,13 +385,13 @@
       background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius);
       padding: 28px 26px; transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
     }
-    .step:hover { border-color: rgba(255,255,255,0.18); transform: translateY(-3px); }
+    .step:hover { border-color: var(--line-strong); transform: translateY(-3px); }
     .step .num-row { display: flex; align-items: center; gap: 14px; }
     .step .num {
       font-family: var(--mono); font-size: 1.6rem; font-weight: 700; color: var(--accent);
       line-height: 1;
     }
-    .step .rule { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(255,107,0,0.5), transparent); }
+    .step .rule { flex: 1; height: 1px; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 50%, transparent), transparent); }
     .step h3 { font-size: 1.2rem; font-weight: 700; margin-top: 18px; color: var(--ink); }
     .step p { color: var(--muted); margin-top: 9px; font-size: 0.98rem; }
     .step p .hi { color: var(--accent-lt); font-weight: 600; }
@@ -247,8 +400,8 @@
     /* ── Founding callout ── */
     .founding-callout {
       display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; justify-content: space-between;
-      background: linear-gradient(120deg, var(--accent-dim), rgba(27, 27, 31, 0.6));
-      border: 1px solid rgba(255, 107, 0, 0.28); border-radius: var(--radius);
+      background: linear-gradient(120deg, var(--accent-dim), var(--panel-2));
+      border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent); border-radius: var(--radius);
       padding: 22px 26px; margin-bottom: 36px;
     }
     .founding-callout .fc-text { min-width: 0; flex: 1 1 320px; }
@@ -260,7 +413,7 @@
     .founding-callout h3 span { color: var(--accent-lt); }
     .founding-callout p { font-size: 0.92rem; color: var(--muted); margin-top: 4px; }
     .fc-meter { flex: 1 1 260px; min-width: 0; }
-    .fc-bar { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.07); overflow: hidden; border: 1px solid var(--line-soft); }
+    .fc-bar { height: 10px; border-radius: 999px; background: var(--fill-subtle); overflow: hidden; border: 1px solid var(--line-soft); }
     .fc-bar > span { display: block; height: 100%; width: 4%; border-radius: 999px;
       background: linear-gradient(90deg, var(--accent), var(--accent-lt)); transition: width 1s var(--ease); }
     .fc-meter .fc-label { display: flex; justify-content: space-between; margin-top: 9px; font-size: 0.82rem; color: var(--muted); }
@@ -275,19 +428,19 @@
     }
     .tier:hover { transform: translateY(-3px); }
     .tier.featured {
-      border-color: rgba(255, 107, 0, 0.45);
-      box-shadow: 0 14px 40px -24px rgba(255, 107, 0, 0.5);
+      border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+      box-shadow: 0 14px 40px -24px color-mix(in srgb, var(--accent) 50%, transparent);
       background: linear-gradient(180deg, var(--panel-2), var(--panel));
     }
     .tier .ribbon {
       position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--accent); color: #160a02; font-size: 0.68rem; font-weight: 700;
+      background: var(--accent); color: var(--on-accent); font-size: 0.68rem; font-weight: 700;
       letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; white-space: nowrap;
     }
     .tier .t-name { font-family: 'Archivo', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--ink); }
     .tier .t-price { margin-top: 14px; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
     .tier .t-price .std {
-      color: var(--faint); text-decoration: line-through; text-decoration-color: rgba(255,107,0,0.6);
+      color: var(--faint); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--accent) 60%, transparent);
       font-size: 1.05rem; font-weight: 500; font-family: var(--mono);
     }
     .tier .t-price .now { font-family: 'Archivo', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--ink); }
@@ -319,7 +472,7 @@
     .marques b { color: var(--text); font-weight: 600; }
     .cred-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(92px, 1fr)); gap: 14px; }
     .cred-stat {
-      background: rgba(255,255,255,0.025); border: 1px solid var(--line-soft);
+      background: var(--fill-subtle); border: 1px solid var(--line-soft);
       border-radius: var(--radius-sm); padding: 18px 14px; text-align: center;
     }
     .cred-stat .v { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
@@ -331,7 +484,7 @@
       background: var(--panel); border: 1px solid var(--line-soft); border-radius: var(--radius-sm);
       overflow: hidden; transition: border-color 0.2s var(--ease);
     }
-    details.faq[open] { border-color: rgba(255, 107, 0, 0.3); }
+    details.faq[open] { border-color: color-mix(in srgb, var(--accent) 30%, transparent); }
     details.faq summary {
       list-style: none; cursor: pointer; padding: 20px 22px; display: flex; align-items: center;
       justify-content: space-between; gap: 16px; font-weight: 600; color: var(--ink); font-size: 1.04rem;
@@ -349,7 +502,7 @@
     .waitlist {
       text-align: center;
       background:
-        radial-gradient(40rem 24rem at 50% 0%, rgba(255,107,0,0.1), transparent 70%),
+        radial-gradient(40rem 24rem at 50% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%),
         linear-gradient(180deg, var(--panel-2), var(--panel));
       border: 1px solid var(--line); border-radius: var(--radius); padding: 56px 28px;
     }
@@ -363,7 +516,7 @@
     .wl-form label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 7px; letter-spacing: 0.04em; }
     .wl-form input[type="email"] {
       width: 100%; padding: 13px 16px; border-radius: 10px; min-height: 48px;
-      background: rgba(0,0,0,0.35); border: 1.5px solid var(--line-soft); color: var(--ink);
+      background: var(--input-bg); border: 1.5px solid var(--line-soft); color: var(--ink);
       font-size: 1rem; font-family: inherit; transition: border-color 0.2s var(--ease);
     }
     .wl-form input[type="email"]::placeholder { color: var(--faint); }
@@ -373,7 +526,7 @@
     .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
     #wl-status { margin: 18px auto 0; min-height: 1.4em; font-size: 0.95rem; max-width: 44ch; }
     #wl-status.ok { color: var(--accent-lt); }
-    #wl-status.err { color: #FF8A33; }
+    #wl-status.err { color: var(--accent-lt); }
     .wl-fine { margin-top: 16px; font-size: 0.82rem; color: var(--faint); }
     .wl-fine a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
     .wl-fine a:hover { color: var(--accent-lt); }
@@ -405,6 +558,7 @@
     }
     @media (min-width: 860px) {
       .nav-links { display: flex; }
+      .theme-switcher { margin-left: 0; }
       .nav-cta { margin-left: 8px; }
       .tiers { grid-template-columns: repeat(2, 1fr); max-width: 760px; margin-left: auto; margin-right: auto; }
       .cred-grid { grid-template-columns: 1.4fr 1fr; }
@@ -421,6 +575,21 @@
     }
   </style>
   <noscript><style>.reveal{opacity:1 !important;transform:none !important}</style></noscript>
+
+  <!-- Theme init — runs before <body> paints to avoid a flash of the wrong theme.
+       Saved choice wins; otherwise default by OS color-scheme preference. -->
+  <script>
+    (function () {
+      var COLORS = { workshop: "#0B0B0D", midnight: "#12161D", daylight: "#FBFCFD", paddock: "#16120B" };
+      var saved = null;
+      try { saved = localStorage.getItem("fla-theme"); } catch (e) {}
+      var theme = (saved && COLORS[saved]) ? saved
+        : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "daylight" : "workshop");
+      document.documentElement.dataset.theme = theme;
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute("content", COLORS[theme]);
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -430,9 +599,9 @@
     <div class="wrap nav">
       <a class="brand" href="#top" aria-label="Fast Lad Academy home">
         <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M8 18a8 8 0 0 1 16 0v3H8z" fill="#F5F5F5"/>
-          <rect x="9" y="14" width="14" height="4" rx="2" fill="#0B0B0D"/>
-          <path d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke="#FF6B00" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path class="lg-helmet" d="M8 18a8 8 0 0 1 16 0v3H8z"/>
+          <rect class="lg-visor" x="9" y="14" width="14" height="4" rx="2"/>
+          <path class="lg-swoosh" d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke-width="2" fill="none" stroke-linecap="round"/>
         </svg>
         <span class="name">FAST LAD ACADEMY</span>
       </a>
@@ -442,6 +611,40 @@
         <a href="#coaches">Coaching</a>
         <a href="#faq">FAQ</a>
       </nav>
+
+      <!-- Theme picker — recolors the page; brand structure/copy unchanged. -->
+      <div class="theme-switcher">
+        <button id="theme-btn" class="theme-btn" type="button"
+                aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu" aria-label="Choose theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor" stroke="none"/>
+          </svg>
+        </button>
+        <div id="theme-menu" class="theme-menu" role="menu" aria-label="Color theme" hidden>
+          <button class="theme-opt" type="button" role="menuitem" data-theme-value="workshop" aria-checked="false">
+            <span class="sw" aria-hidden="true" style="background:linear-gradient(135deg,#0B0B0D 50%,#FF6B00 50%)"></span>
+            <span class="txt"><span class="lbl">Workshop</span><span class="blurb">Near-black · race-fuel orange</span></span>
+            <svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="theme-opt" type="button" role="menuitem" data-theme-value="midnight" aria-checked="false">
+            <span class="sw" aria-hidden="true" style="background:linear-gradient(135deg,#12161D 50%,#FF6B00 50%)"></span>
+            <span class="txt"><span class="lbl">Midnight</span><span class="blurb">Deep blue · after hours</span></span>
+            <svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="theme-opt" type="button" role="menuitem" data-theme-value="daylight" aria-checked="false">
+            <span class="sw" aria-hidden="true" style="background:linear-gradient(135deg,#FBFCFD 50%,#FF6B00 50%)"></span>
+            <span class="txt"><span class="lbl">Daylight</span><span class="blurb">Bright · paddock daylight</span></span>
+            <svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="theme-opt" type="button" role="menuitem" data-theme-value="paddock" aria-checked="false">
+            <span class="sw" aria-hidden="true" style="background:linear-gradient(135deg,#16120B 50%,#E0B25A 50%)"></span>
+            <span class="txt"><span class="lbl">Paddock Gold</span><span class="blurb">Warm dark · championship gold</span></span>
+            <svg class="tick" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+
       <a class="btn btn-primary btn-sm nav-cta" href="#join"><span class="cta-full">Join the Founding 500</span><span class="cta-short">Join the 500</span></a>
     </div>
   </header>
@@ -795,9 +998,9 @@
   <footer class="site">
     <div class="wrap">
       <svg class="logo" viewBox="0 0 32 32" role="img" aria-label="Fast Lad Academy">
-        <path d="M8 18a8 8 0 0 1 16 0v3H8z" fill="#F5F5F5"/>
-        <rect x="9" y="14" width="14" height="4" rx="2" fill="#0B0B0D"/>
-        <path d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke="#FF6B00" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path class="lg-helmet" d="M8 18a8 8 0 0 1 16 0v3H8z"/>
+        <rect class="lg-visor" x="9" y="14" width="14" height="4" rx="2"/>
+        <path class="lg-swoosh" d="M11 22c1.5 1.5 3 1.5 5 0 2 1.5 3.5 1.5 5 0" stroke-width="2" fill="none" stroke-linecap="round"/>
       </svg>
       <p class="f-name">FAST LAD ACADEMY — <span>come home faster.</span></p>
       <p class="f-tag">Data and video coaching for drivers serious about getting faster.</p>
@@ -912,6 +1115,67 @@
           if (btn) { btn.disabled = false; btn.textContent = "Claim my founding spot"; }
         });
       });
+    })();
+  </script>
+
+  <!-- Theme switcher: menu open/close + selection persistence -->
+  <script>
+    (function () {
+      "use strict";
+      var COLORS = { workshop: "#0B0B0D", midnight: "#12161D", daylight: "#FBFCFD", paddock: "#16120B" };
+      var btn = document.getElementById("theme-btn");
+      var menu = document.getElementById("theme-menu");
+      if (!btn || !menu) return;
+      var opts = menu.querySelectorAll(".theme-opt");
+      var meta = document.querySelector('meta[name="theme-color"]');
+
+      function current() { return document.documentElement.dataset.theme || "workshop"; }
+
+      function markActive() {
+        var cur = current();
+        opts.forEach(function (o) {
+          o.setAttribute("aria-checked", o.dataset.themeValue === cur ? "true" : "false");
+        });
+      }
+
+      function onDocClick(ev) {
+        if (ev.target !== btn && !btn.contains(ev.target) && !menu.contains(ev.target)) closeMenu(false);
+      }
+      function onKey(ev) {
+        if (ev.key === "Escape" || ev.key === "Esc") { ev.preventDefault(); closeMenu(true); }
+      }
+      function openMenu() {
+        markActive();
+        menu.hidden = false;
+        btn.setAttribute("aria-expanded", "true");
+        document.addEventListener("click", onDocClick, true);
+        document.addEventListener("keydown", onKey, true);
+      }
+      function closeMenu(focusBtn) {
+        menu.hidden = true;
+        btn.setAttribute("aria-expanded", "false");
+        document.removeEventListener("click", onDocClick, true);
+        document.removeEventListener("keydown", onKey, true);
+        if (focusBtn) btn.focus();
+      }
+
+      btn.addEventListener("click", function () {
+        if (menu.hidden) { openMenu(); } else { closeMenu(false); }
+      });
+
+      opts.forEach(function (o) {
+        o.addEventListener("click", function () {
+          var t = o.dataset.themeValue;
+          if (!COLORS[t]) return;
+          document.documentElement.dataset.theme = t;
+          try { localStorage.setItem("fla-theme", t); } catch (e) {}
+          if (meta) meta.setAttribute("content", COLORS[t]);
+          markActive();
+          closeMenu(true);
+        });
+      });
+
+      markActive();
     })();
   </script>
 
