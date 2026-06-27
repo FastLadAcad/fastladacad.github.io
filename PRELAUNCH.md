@@ -32,7 +32,7 @@ loud champion/credential claims. `twitter:card` downgraded to `summary` (no brok
 - **Hero frame line** — "One track weekend costs $500 … one month costs less" trips the *"Plus, not vs."* rule (and contradicts the FAQ). Suggested reframe: *"You already spend $500+ on a track weekend. Membership — for less than that, every month — is what turns those laps into time you keep."*
 - **"48 hours"** — stated as a hard guarantee before any review delivered (hero pill, step 3, the "48h" stat tile, FAQ, meta). Soften to "typically ~48h" to avoid refund pressure on the first slip.
 - **OG share image** — still no `og-image.png`. `twitter:card` now set to `summary` (safe, no broken card). To upgrade: produce a 1200×630 PNG in the **new brand (near-black + orange, Archivo)**, drop it at repo root, uncomment the `og:image` block, and restore `twitter:card` to `summary_large_image`.
-- **Palette confirm (brand owner)** — gold token is `#C9A227`; spec says Limestone Gold `#C4A35A`. Orange is the dominant CTA color on a Paddock/marketing surface (spec reserves orange for the in-app Workshop). Wax-seal crimson is a 3rd, unsanctioned accent. Bless or adjust.
+- **Palette LOCKED** (DECISIONS #44/#48) — accent `#FF6B00` (Workshop Orange) everywhere; the Paddock skin's gold `#E0B25A` is a page-accent only, never the logo. Limestone Gold + wax-seal crimson are RETIRED with the medieval theme — gone, not "to confirm."
 
 ## ⚪ Nice-to-have
 - Meta description ~197 chars → tighten to ~155 so the tagline isn't truncated in search.
