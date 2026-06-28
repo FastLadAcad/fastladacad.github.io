@@ -50,6 +50,8 @@
       --bg: #0B0B0D;
       --panel: #141417;
       --panel-2: #1B1B1F;
+      --map-bg: #0D0D10;       /* track-map preview surface (mirrors render.py map_bg) */
+      --map-track: #2A2A30;    /* the asphalt ribbon */
       --ink: #F6F7F8;          /* headings */
       --text: #D4D6DA;         /* body */
       --muted: #9A9DA4;        /* secondary */
@@ -83,6 +85,8 @@
       --bg: #0B0B0D;
       --panel: #141417;
       --panel-2: #1B1B1F;
+      --map-bg: #0D0D10;
+      --map-track: #2A2A30;
       --ink: #F6F7F8;
       --text: #D4D6DA;
       --muted: #9A9DA4;
@@ -105,6 +109,8 @@
       --bg: #12161D;
       --panel: #181D26;
       --panel-2: #1F2530;
+      --map-bg: #0D0E12;
+      --map-track: #242B34;
       --ink: #F2F5FA;
       --text: #D3DAE3;
       --muted: #9AA4B2;
@@ -129,6 +135,8 @@
       --bg: #FBFCFD;
       --panel: #F4F6F8;
       --panel-2: #FFFFFF;
+      --map-bg: #E8ECF0;       /* light parchment map on the light skin */
+      --map-track: #C2CAD3;
       --ink: #0F1722;
       --text: #1F2A37;
       --muted: #4F5965;
@@ -153,6 +161,8 @@
       --bg: #16120B;
       --panel: #1F1A12;
       --panel-2: #2A2317;
+      --map-bg: #100E09;
+      --map-track: #2A2419;
       --ink: #F7F1E6;
       --text: #E8DFCF;
       --muted: #B5A88E;
@@ -678,32 +688,27 @@
             <div class="rc-frame">
               <span class="rc-chip">T4 · APEX</span>
               <svg viewBox="0 0 480 240" aria-hidden="true">
-                <defs>
-                  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0" stop-color="#1a1a20"/><stop offset="1" stop-color="#0d0d10"/>
-                  </linearGradient>
-                </defs>
-                <rect width="480" height="240" fill="url(#sky)"/>
-                <path d="M0 150 Q 240 120 480 150 L480 240 L0 240 Z" fill="#141417"/>
-                <path d="M70 240 C 150 190 200 175 250 168 C 320 158 380 150 430 120" fill="none" stroke="#2a2a30" stroke-width="34" stroke-linecap="round"/>
-                <path d="M70 240 C 150 190 200 175 250 168 C 320 158 380 150 430 120" fill="none" stroke="#FF6B00" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity="0.95"/>
-                <circle cx="250" cy="168" r="5.5" fill="#FF6B00"/>
-                <circle cx="250" cy="168" r="11" fill="none" stroke="#FF6B00" stroke-width="1.5" opacity="0.5"/>
+                <rect width="480" height="240" style="fill: var(--map-bg)"/>
+                <path d="M0 150 Q 240 120 480 150 L480 240 L0 240 Z" style="fill: var(--panel)"/>
+                <path d="M70 240 C 150 190 200 175 250 168 C 320 158 380 150 430 120" fill="none" style="stroke: var(--map-track)" stroke-width="34" stroke-linecap="round"/>
+                <path d="M70 240 C 150 190 200 175 250 168 C 320 158 380 150 430 120" fill="none" style="stroke: var(--accent)" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round" opacity="0.95"/>
+                <circle cx="250" cy="168" r="5.5" style="fill: var(--accent)"/>
+                <circle cx="250" cy="168" r="11" fill="none" style="stroke: var(--accent)" stroke-width="1.5" opacity="0.5"/>
               </svg>
             </div>
             <div class="rc-telemetry">
               <div class="rc-metric">
                 <div class="k">Speed</div>
                 <svg class="spark" viewBox="0 0 200 40" width="100%" height="40" aria-hidden="true">
-                  <polyline points="0,10 40,12 80,28 120,32 160,18 200,8" fill="none" stroke="#9A9DA4" stroke-width="2"/>
-                  <circle cx="120" cy="32" r="3" fill="#FF6B00"/>
+                  <polyline points="0,10 40,12 80,28 120,32 160,18 200,8" fill="none" style="stroke: var(--muted)" stroke-width="2"/>
+                  <circle cx="120" cy="32" r="3" style="fill: var(--accent)"/>
                 </svg>
               </div>
               <div class="rc-metric">
                 <div class="k">Brake</div>
                 <svg class="spark" viewBox="0 0 200 40" width="100%" height="40" aria-hidden="true">
-                  <polyline points="0,34 70,34 100,8 140,12 200,34" fill="none" stroke="#9A9DA4" stroke-width="2"/>
-                  <circle cx="100" cy="8" r="3" fill="#FF6B00"/>
+                  <polyline points="0,34 70,34 100,8 140,12 200,34" fill="none" style="stroke: var(--muted)" stroke-width="2"/>
+                  <circle cx="100" cy="8" r="3" style="fill: var(--accent)"/>
                 </svg>
               </div>
             </div>
