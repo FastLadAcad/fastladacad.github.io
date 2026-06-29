@@ -18,7 +18,7 @@ Served via **GitHub Pages** from the `main` branch at the apex domain (`CNAME` �
 ## Sections
 
 Hero → mission band → how it works (learn → submit → coached in 48h) → membership tiers
-($25 / $50 / $99, with the Founding 500 "25% off for life" scarcity callout) → founding-instructor
+(Paddock $29 / Grid $99, with the Founding 500 "20% off for life" → $23 / $79 scarcity callout) → founding-instructor
 credibility strip → FAQ → waitlist capture → footer.
 
 ## Two things to wire up before launch

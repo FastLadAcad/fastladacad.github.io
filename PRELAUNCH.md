@@ -12,7 +12,7 @@ This **resolves** the earlier should-fix items: palette confirm, the hero "cheap
 loud champion/credential claims. `twitter:card` downgraded to `summary` (no broken large card).
 
 ## ✅ Done this session — pricing/content now matches DECISIONS #38–40
-- Paddock $25→**$29** (founding $18.75→**$21.75**)
+- Paddock $25→**$29** (founding now **$23**, −20% — see DECISIONS #50; was $21.75 at −25%)
 - **Hot Lap tier deleted** (retired); Grid promoted to the featured "Most popular" card
 - Grid: "Everything in Hot Lap"→"Everything in Paddock"; "2 reviews"→**1 included review/mo (a $119 value)**
 - Grid perks → **Driver's Meetings** + **Live In-Car** (canonical #40 exclusives)
