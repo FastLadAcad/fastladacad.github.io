@@ -8,7 +8,7 @@ Served via **GitHub Pages** from the `main` branch at the apex domain (`CNAME` �
 ## What's here
 
 - `index.html` — the whole landing page. Self-contained: vanilla HTML/CSS/JS, no build step, no
-  framework, no external dependency beyond Google Fonts (Cinzel + Inter). Single file so Pages
+  framework, no external dependency beyond Google Fonts (Archivo + Inter + JetBrains Mono). Single file so Pages
   can't break it.
 - `favicon.svg` — helmet + mustache mark.
 - `CNAME` — custom domain (`fastladacad.com`). Don't remove.
@@ -37,7 +37,7 @@ richer link previews.
 - Paddock Gold `#C9A227` — brand / achievement
 - Workshop Orange `#FF6B00` — actions / CTAs
 - Wax-seal crimson `#8B1A1A` — scarcity / urgency
-- Workshop dark `#0E0E10` ground · Cinzel display · Inter body
+- Workshop dark `#0B0B0D` ground · Archivo display · Inter body · JetBrains Mono data
 - Voice: **come home faster.** No competitor names in public copy.
 
 ## Local preview
